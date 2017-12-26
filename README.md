@@ -4,7 +4,12 @@
 ViewGroup的左上,右上,左下,右下位置.<br>
 思路:一,重写ViewGroup的onMeasure(...),在onMeasure中对子控件进行宽高测量,然后根据MeasureSpec的SpecMode得出自定义ViewGroup的最终宽高.<br>
 代码:使用measureChildren(...)对子控件进行遍历测量,但是使用这种方式好像子控件设置margin会没有作用,网上说要用measureChildWithMargins(...),但是我不会用
-,见相关文章http://www.jianshu.com/p/5fbb1ce3c7f0.
+,见相关文章http://www.jianshu.com/p/5fbb1ce3c7f0.<br>
+这里有一个概念SpecMode,它有三种数值<br>
+MeasureSpec.EXACTLY:精确模式,此时控件的尺寸是固定的,一般是在布局文件中已经写死的.<br>
+MeasureSpec.AT_MOST:最大模式,此时控件的尺寸是可变化的,但是它不会超出父控件给定的范围,对应布局文件中的wrap_content和match_parent.<br>
+MeasureSpec.UNSPECIFIED:未指定模式,当前控件大小不受限定,出现的情况比较少,一般是用不到的.<br>
+
 
         @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
